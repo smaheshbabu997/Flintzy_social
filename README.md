@@ -108,12 +108,12 @@ Before running the application, ensure the following environment variables are c
 
 ### 2. Install Dependencies
 Open your terminal in the project root and run:
-```bash
+``bash
 mvn clean install
 
 ### 3. Run Application
 
-```bash
+``bash
 mvn spring-boot:run
 App starts at: http://localhost:8080
 
