@@ -41,5 +41,4 @@ CREATE TABLE posts (
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  CONSTRAINT fk_post_user FOREIGN KEY (user_id) REFERENCES users(id),
  CONSTRAINT fk_post_page FOREIGN KEY (fb_page_id) REFERENCES facebook_pages(id)
-
 );
