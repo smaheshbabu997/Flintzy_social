@@ -185,7 +185,7 @@ Follow these steps to get the application up and running quickly:
     Ensure you have configured the **DB**, **JWT**, **Google**, and **Facebook** credentials in your environment.
 
 3.  **Configure Facebook App:**
-    In the [Meta for Developers](https://developers.facebook.com/) dashboard, ensure the following are set:
+    In the Meta for Developers dashboard, ensure the following are set:
     * **Roles:** Add your account as an Admin/Developer.
     * **Site URL:** Set to `http://localhost:8080`.
     * **Valid OAuth Redirect URIs:** Add `http://localhost:8080/api/facebook/callback`.
