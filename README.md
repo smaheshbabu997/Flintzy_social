@@ -24,16 +24,13 @@ A production‑minded backend that lets users authenticate via Google, securely 
 - **HTTP client:** RestTemplate
 - **Build:** Maven
 
-# Prerequisites
-Java: 17+
+## 📋 Prerequisites
 
-Maven: 3.9+
-
-MySQL: 8+
-
-Google Cloud OAuth client: Web application credentials
-
-Meta for Developers: Facebook App with OAuth configured
+- Java 17+
+- Maven 3.9+
+- MySQL 8+
+- Google Cloud OAuth client (Web application credentials)
+- Meta for Developers Facebook App with OAuth configured
 
 # Set environment variables in your shell or IDE run configuration:
 
