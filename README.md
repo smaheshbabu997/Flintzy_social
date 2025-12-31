@@ -1,25 +1,28 @@
 # Flintzy Social — Spring Boot backend for social media management
-A production-minded backend that lets users authenticate via Google, securely link Facebook Pages, and publish posts to those pages via the Facebook Graph API. All APIs are protected with JWT. Designed to be extended to Instagram and YouTube.
-# Features
-Authentication: Google OAuth2 login; backend issues JWT for API access.
 
-Facebook connect: Link Facebook Pages using the Graph API and store Page Access Tokens securely.
+A production‑minded backend that lets users authenticate via Google, securely link Facebook Pages, and publish posts to those pages via the Facebook Graph API. All APIs are protected with JWT. Designed to be extended to Instagram and YouTube.
 
-Post publishing: Publish text posts to Facebook Pages on behalf of the user.
+---
 
-Security: Stateless JWT-based authorization on all endpoints (except OAuth redirects/callbacks).
+## ✨ Features
 
-Database: MySQL with JPA; migrations via Flyway.
+- **Authentication:** Google OAuth2 login; backend issues **JWT** for API access.
+- **Facebook connect:** Link Facebook Pages using the **Graph API** and store Page Access Tokens securely.
+- **Post publishing:** Publish text posts to Facebook Pages on behalf of the user.
+- **Security:** Stateless JWT‑based authorization on all endpoints (except OAuth redirects/callbacks).
+- **Database:** MySQL with JPA; migrations via Flyway.
+- **Extensible:** Architecture ready to add Instagram and YouTube.
 
-Observability: Spring Boot Actuator for basic health endpoints.
+---
 
-Extensible: Architecture ready to add Instagram and YouTube.
+## 🛠 Tech stack
 
-# Tech stack
-* **Backend:** Java 17, Spring Boot 3.x
-* **Database:** PostgreSQL / H2
-* **ORM:** Spring Data JPA
-* **Tools:** Bruno (API Testing), Git
+- **Backend:** Spring Boot 3, Java 17
+- **Security:** Spring Security, OAuth2 Client (Google), JJWT
+- **Data:** Spring Data JPA, MySQL 8
+- **Migrations:** Flyway
+- **HTTP client:** RestTemplate
+- **Build:** Maven
 
 # Prerequisites
 Java: 17+
