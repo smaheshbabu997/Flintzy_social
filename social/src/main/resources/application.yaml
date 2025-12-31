@@ -3,8 +3,8 @@ spring:
     name: social
   datasource:
     url: jdbc:mysql://localhost:3306/flintzy_social
-    username: root
-    password: root1234
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -20,8 +20,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 124151224279-gc3b267h95op9npl6vgqqq6f2skj38ot.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
             scope: openid, profile, email
         provider:
           google:
@@ -34,6 +34,6 @@ jwt:
   refresh-token-exp-days: 7
 
 facebook:
-  app-id: 1423121636033509
-  app-secret: 2575671194952f6c6d4a2308b9c8b0fd
+  app-id: ${FB_APP_ID}
+  app-secret: ${FB_APP_SECRET}
   redirect-uri: http://localhost:8080/api/facebook/callback
