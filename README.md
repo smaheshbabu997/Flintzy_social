@@ -32,86 +32,61 @@ A production‑minded backend that lets users authenticate via Google, securely 
 - Google Cloud OAuth client (Web application credentials)
 - Meta for Developers Facebook App with OAuth configured
 
-# Set environment variables in your shell or IDE run configuration:
+# Flintzy Social Backend
 
-DB: DB_USERNAME, DB_PASSWORD
+Spring Boot + MySQL backend for managing social media accounts. Supports Google OAuth2 login, JWT‑secured APIs, and Facebook Page integration via Graph API.
 
-JWT: JWT_SECRET
+---
 
-Google: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+## ⚙️ Environment Variables
 
-Facebook: FB_APP_ID, FB_APP_SECRET, FB_REDIRECT_URI
+Set these in your shell or IDE:
 
-# Security design
-OAuth2 login: Spring Security handles Google sign-in.
+- **DB:** `DB_USERNAME`, `DB_PASSWORD`
+- **JWT:** `JWT_SECRET`
+- **Google:** `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+- **Facebook:** `FB_APP_ID`, `FB_APP_SECRET`, `FB_REDIRECT_URI`
 
-JWT issuance: On successful OAuth login, the backend returns a JWT (Bearer token).
+---
 
-Stateless API: All protected endpoints require Authorization: Bearer <JWT>.
+## 🔐 Security
 
-Key components:
+- **OAuth2 login:** Google sign‑in via Spring Security  
+- **JWT issuance:** Backend returns JWT after login  
+- **Stateless API:** All endpoints require `Authorization: Bearer <JWT>`
 
-SecurityConfig: Configures stateless security, OAuth2 login, and the JWT filter.
+Key components: `SecurityConfig`, `OAuth2SuccessHandler`, `JwtAuthFilter`
 
-OAuth2SuccessHandler: Creates or updates the user and returns a JWT after Google login.
+---
 
-JwtAuthFilter: Validates JWT from the Authorization header and sets the SecurityContext.
+## 📡 Facebook Integration
 
-# Facebook integration
-Scopes in development: email, public_profile, pages_show_list, pages_manage_posts.
+- **Scopes (dev):** `email`, `public_profile`, `pages_show_list`, `pages_manage_posts`
+- **Flow:** Authorize → Token exchange → Fetch `/me/accounts` → Publish via `/{page-id}/feed`
+- **Redirect URIs:** Must be whitelisted in Facebook App dashboard  
+- **HTTPS:** Required for non‑local domains (use `ngrok` for local HTTPS testing)
 
-Flow:
+---
 
-Authorize: Redirect user to Facebook OAuth dialog with required scopes.
+## 🛠 Facebook App Setup
 
-Token exchange: Exchange code for a User Access Token.
+- **Roles:** Add yourself as Administrator/Developer  
+- **Settings → Basic:**  
+  - Site URL: `http://localhost:8080/`  
+- **Settings → Advanced:**  
+  - Valid OAuth Redirect URIs:  
+    - `http://localhost:8080/api/facebook/callback`  
+    - (Optional) `http://127.0.0.1:8080/api/facebook/callback`  
+- Keep app in **Development Mode** for testing restricted scopes
 
-Pages: Call /me/accounts to get managed pages and Page Access Tokens.
+---
 
-Publish: Use POST /{page-id}/feed with message and access_token.
+## ▶️ Run Locally
 
-Important:
+1. Create DB:  
+   ```sql
+   CREATE DATABASE flintzy_social;
 
-Redirect URIs: Must be whitelisted under “Valid OAuth Redirect URIs” in the Facebook App dashboard.
-
-HTTPS requirement: For non-local domains, the redirect must use https://. Local http://localhost:8080/... is allowed in development.
-
-# Facebook app dashboard configuration
-Add these in the Meta for Developers dashboard:
-
-Roles:
-
-Administrator/Developer for your account to test restricted scopes.
-
-Settings → Basic:
-
-App domains: Leave blank for localhost; set for production domain later.
-
-Site URL: http://localhost:8080/
-
-Settings → Advanced:
-
-Valid OAuth Redirect URIs:
-
-http://localhost:8080/api/facebook/callback
-
-Optional: http://127.0.0.1:8080/api/facebook/callback
-
-Development mode: Keep the app in Development; only admins/devs/testers can test restricted scopes.
-
-If you see “Invalid Scopes,” ensure you’re logged in as a user with a role on the app.
-
-For staging/production:
-
-Use https for redirect URIs (e.g., https://api.yourdomain.com/api/facebook/callback).
-
-Consider using ngrok during development to test HTTPS redirects:
-
-Run ngrok http 8080
-
-Set facebook.redirect-uri to https://<your-ngrok-subdomain>.ngrok.io/api/facebook/callback
-
-Add that HTTPS URL to Valid OAuth Redirect URIs.
 
 # How to run locally
 Create database
