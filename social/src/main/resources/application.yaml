@@ -36,4 +36,5 @@ jwt:
 facebook:
   app-id: ${FB_APP_ID}
   app-secret: ${FB_APP_SECRET}
-  redirect-uri: http://localhost:8080/api/facebook/callback
+  redirect-uri: ${CALL_BACK_URL}    
+  # http://localhost:8080/api/facebook/callback
