@@ -171,41 +171,39 @@ Authorization: Bearer <JWT>
 * **Auth:** **JWT Required**
 * **Request Body:** ```json
     { "message": "Hello from Flintzy backend!" }
-    ```
 * **Response:** `{ "postId": "<fb-post-id>" }`
 
-# 1) Get Google login URL (browser flow)
-curl -X GET http://localhost:8080/api/auth/login/google
+## ✅ Quick Start Checklist
 
-# 2) Start Facebook connect (returns authUrl)
-curl -H "Authorization: Bearer <JWT>" \
-  http://localhost:8080/api/facebook/connect
+Follow these steps to get the application up and running quickly:
 
-# 3) Facebook redirects here after approval (simulate call)
-curl -H "Authorization: Bearer <JWT>" \
-  "http://localhost:8080/api/facebook/callback?code=<CODE_FROM_FACEBOOK>"
+1.  **Create Database:**
+    Run the following command in your SQL terminal:
+    `CREATE DATABASE flintzy_social;`
 
-# 4) List linked Facebook pages
-curl -H "Authorization: Bearer <JWT>" \
-  http://localhost:8080/api/facebook/pages
+2.  **Set Environment Variables:**
+    Ensure you have configured the **DB**, **JWT**, **Google**, and **Facebook** credentials in your environment.
 
-# 5) Publish a post to a linked page
-curl -X POST -H "Authorization: Bearer <JWT>" \
-  -H "Content-Type: application/json" \
-  -d '{"message":"Hello from Flintzy backend!"}' \
-  http://localhost:8080/api/facebook/pages/<PAGE_ID>/publish
-  
-# Quick start checklist
-Create DB: CREATE DATABASE flintzy_social;
+3.  **Configure Facebook App:**
+    In the [Meta for Developers](https://developers.facebook.com/) dashboard, ensure the following are set:
+    * **Roles:** Add your account as an Admin/Developer.
+    * **Site URL:** Set to `http://localhost:8080`.
+    * **Valid OAuth Redirect URIs:** Add `http://localhost:8080/api/facebook/callback`.
 
-Set env vars: DB, JWT, Google, Facebook.
+4.  **Run the Application:**
+    Execute the command:
+    ```bash
+    mvn spring-boot:run
+    ```
 
-Configure Facebook App: Roles, Site URL, Valid OAuth Redirect URIs.
+5.  **User Authentication (Login):**
+    * Visit: **`http://localhost:8080/oauth2/authorization/google`** in your browser.
+    * On success, you will receive a **JWT** in the JSON response.
 
-Run: mvn spring-boot:run
+6.  **Connect Facebook Account:**
+    * Navigate to: **`/api/facebook/connect`** and authorize the app.
+    * The flow will complete via the **`/api/facebook/callback`** endpoint.
 
-Login: http://localhost:8080/oauth2/authorization/google → get JWT.
-
-Connect FB: /api/facebook/connect → authorize → /api/facebook/callback.
-
-Publish: /api/facebook/pages/{pageId}/publish with message.
+7.  **Publish to Facebook Page:**
+    * Send a `POST` request to: **`/api/facebook/pages/{pageId}/publish`**
+    * Include your **message** in the request body to post to your page.
