@@ -129,54 +129,50 @@ Add the header below to all secured requests:
 Code
 Authorization: Bearer <JWT>
 
-# API endpoints
-Authentication
-GET /api/auth/login/google
+## 📍 API Endpoints
 
-Description: Returns the relative path to initiate Google OAuth.
+### 🔐 Authentication
 
-Auth: None.
+#### **1. Google Login Initiation**
+* **Endpoint:** `GET /api/auth/login/google`
+* **Description:** Returns the relative path to initiate the **Google OAuth2** flow.
+* **Auth:** **None**
+* **Response:** `{ "loginUrl": "/oauth2/authorization/google" }`
 
-Response: { "loginUrl": "/oauth2/authorization/google" }
+#### **2. OAuth2 Callback**
+* **Description:** Handled automatically by **Spring Security**.
+* **Response:** On a successful login, the server returns `{ "token": "<JWT>" }`.
 
-OAuth2 callback (handled by Spring Security)
+---
 
-On success, the server responds with { "token": "<JWT>" }.
+### 📱 Facebook Integration
 
-Facebook connect
-GET /api/facebook/connect
+#### **1. Connect Facebook Account**
+* **Endpoint:** `GET /api/facebook/connect`
+* **Description:** Returns the **Facebook OAuth URL** with all required permission scopes.
+* **Auth:** **JWT Required**
+* **Response:** `{ "authUrl": "https://www.facebook.com/..." }`
 
-Description: Returns the Facebook OAuth URL with required scopes.
+#### **2. Facebook Callback**
+* **Endpoint:** `GET /api/facebook/callback?code=<CODE>`
+* **Description:** Exchanges the auth code for an **Access Token**, fetches user pages, and persists them to the database.
+* **Auth:** **JWT Recommended** (Ties linked pages to your specific user account).
+* **Response:** `{ "linkedPages": <count> }`
 
-Auth: JWT required.
+#### **3. List Linked Pages**
+* **Endpoint:** `GET /api/facebook/pages`
+* **Description:** Returns a list of all **Facebook Pages** currently linked to the authenticated user.
+* **Auth:** **JWT Required**
+* **Response:** `[ { "pageId": "123", "name": "My Page" }, ... ]`
 
-Response: { "authUrl": "https://www.facebook.com/...&scope=pages_show_list,pages_manage_posts,email,public_profile" }
-
-GET /api/facebook/callback?code=<CODE>
-
-Description: Exchanges code for token, fetches pages, persists account and pages.
-
-Auth: JWT recommended (tie the linked pages to the authenticated user).
-
-Response: { "linkedPages": <count> }
-
-GET /api/facebook/pages
-
-Description: Lists linked pages for the authenticated user.
-
-Auth: JWT required.
-
-Response: [ { "pageId": "123", "name": "My Page" }, ... ]
-
-POST /api/facebook/pages/{pageId}/publish
-
-Description: Publishes a text post to the specified linked page.
-
-Auth: JWT required.
-
-Body: { "message": "Hello from Flintzy backend!" }
-
-Response: { "postId": "<fb-post-id>" }
+#### **4. Publish Post**
+* **Endpoint:** `POST /api/facebook/pages/{pageId}/publish`
+* **Description:** Publishes a text-based post directly to the specified **Facebook Page**.
+* **Auth:** **JWT Required**
+* **Request Body:** ```json
+    { "message": "Hello from Flintzy backend!" }
+    ```
+* **Response:** `{ "postId": "<fb-post-id>" }`
 
 # 1) Get Google login URL (browser flow)
 curl -X GET http://localhost:8080/api/auth/login/google
