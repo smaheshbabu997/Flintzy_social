@@ -88,20 +88,29 @@ Key components: `SecurityConfig`, `OAuth2SuccessHandler`, `JwtAuthFilter`
    CREATE DATABASE flintzy_social;
 
 
-2. Set Environment Variables
+## ⚙️ Setup & Configuration
 
-DB: DB_USERNAME, DB_PASSWORD
+### 1. Set Environment Variables
+Before running the application, ensure the following environment variables are configured in your system or IDE:
 
-JWT: JWT_SECRET
+| Category | Variable Name | Description |
+| :--- | :--- | :--- |
+| **Database** | `DB_USERNAME` | Your database username |
+| | `DB_PASSWORD` | Your database password |
+| **JWT** | `JWT_SECRET` | Secret key for signing tokens |
+| **Google** | `GOOGLE_CLIENT_ID` | Client ID from Google Cloud Console |
+| | `GOOGLE_CLIENT_SECRET` | Client Secret from Google Cloud Console |
+| **Facebook** | `FB_APP_ID` | App ID from Meta for Developers |
+| | `FB_APP_SECRET` | App Secret from Meta for Developers |
+| | `FB_REDIRECT_URI` | `http://localhost:8080/api/facebook/callback` |
 
-Google: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+---
 
-Facebook: FB_APP_ID, FB_APP_SECRET, FB_REDIRECT_URI
-
-3. Install Dependencies
-
-bash
+### 2. Install Dependencies
+Open your terminal in the project root and run:
+```bash
 mvn clean install
+
 4. Run Application
 
 bash
