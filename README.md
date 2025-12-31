@@ -16,17 +16,10 @@ Observability: Spring Boot Actuator for basic health endpoints.
 Extensible: Architecture ready to add Instagram and YouTube.
 
 # Tech stack
-Backend: Spring Boot 3, Java 17
-
-Security: Spring Security, OAuth2 Client (Google), JJWT
-
-Data: Spring Data JPA, MySQL 8
-
-Migrations: Flyway
-
-HTTP client: RestTemplate
-
-Build: Maven
+* **Backend:** Java 17, Spring Boot 3.x
+* **Database:** PostgreSQL / H2
+* **ORM:** Spring Data JPA
+* **Tools:** Bruno (API Testing), Git
 
 # Prerequisites
 Java: 17+
