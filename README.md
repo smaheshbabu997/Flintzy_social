@@ -111,19 +111,19 @@ Open your terminal in the project root and run:
 ```bash
 mvn clean install
 
-4. Run Application
+### 3. Run Application
 
-bash
+```bash
 mvn spring-boot:run
 App starts at: http://localhost:8080
 
-5. Login Flow (Google)
+### 4. Login Flow (Google)
 
 Visit: http://localhost:8080/oauth2/authorization/google in your browser.
 
 On success, you’ll receive a JSON response containing your JWT.
 
-6. Use JWT in API Calls
+### 5. Use JWT in API Calls
 Add the header below to all secured requests:
 
 Code
