@@ -88,12 +88,7 @@ Key components: `SecurityConfig`, `OAuth2SuccessHandler`, `JwtAuthFilter`
    CREATE DATABASE flintzy_social;
 
 
-# How to run locally
-Create database
-
-Command: CREATE DATABASE flintzy_social;
-
-Set environment variables
+2. Set Environment Variables
 
 DB: DB_USERNAME, DB_PASSWORD
 
@@ -103,25 +98,27 @@ Google: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
 
 Facebook: FB_APP_ID, FB_APP_SECRET, FB_REDIRECT_URI
 
-Install dependencies
+3. Install Dependencies
 
-Command: mvn clean install
+bash
+mvn clean install
+4. Run Application
 
-Run application
+bash
+mvn spring-boot:run
+App starts at: http://localhost:8080
 
-Command: mvn spring-boot:run
+5. Login Flow (Google)
 
-App starts at http://localhost:8080
-
-Login flow (Google)
-
-Visit http://localhost:8080/oauth2/authorization/google in a browser.
+Visit: http://localhost:8080/oauth2/authorization/google in your browser.
 
 On success, you’ll receive a JSON response containing your JWT.
 
-Use JWT
+6. Use JWT in API Calls
+Add the header below to all secured requests:
 
-Add header Authorization: Bearer <JWT> to all API calls.
+Code
+Authorization: Bearer <JWT>
 
 # API endpoints
 Authentication
